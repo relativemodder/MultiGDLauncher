@@ -62,7 +62,9 @@ namespace MultiGDLauncher
 
             BitmapImage bi3 = new BitmapImage();
             bi3.BeginInit();
-            bi3.StreamSource = Application.GetResourceStream(new Uri($"/Assets/ProfilesIcons/{selectedIcon}", UriKind.Relative)).Stream;
+            bi3.StreamSource = Application.GetResourceStream(
+                new Uri($"/Assets/ProfilesIcons/{selectedIcon}", UriKind.Relative)
+            ).Stream;
             bi3.EndInit();
             currentIconImage.Source = bi3;
         }
@@ -97,7 +99,9 @@ namespace MultiGDLauncher
                 Image image = new Image();
                 BitmapImage bi3 = new BitmapImage();
                 bi3.BeginInit();
-                bi3.StreamSource = Application.GetResourceStream(new Uri($"/Assets/ProfilesIcons/{i}.png", UriKind.Relative)).Stream;
+                bi3.StreamSource = Application.GetResourceStream(
+                    new Uri($"/Assets/ProfilesIcons/{i}.png", UriKind.Relative)
+                ).Stream;
                 bi3.EndInit();
                 image.Source = bi3;
 
@@ -126,7 +130,7 @@ namespace MultiGDLauncher
 
         private string constructInstallationPath()
         {
-            return $"{LauncherSettingsState.StoragePath}\\{instanceNameInput.Text}";
+            return Utils.GetInstanceDirectory(instanceNameInput.Text);
         }
 
         private void onEndedCopying()
@@ -151,7 +155,6 @@ namespace MultiGDLauncher
                 PlayPage playPage = new PlayPage(instanceNameInput.Text);
                 Utils.GetMainWindow().navFrame.Navigate(playPage);
 
-                // Utils.GetMainWindow().OnPlay(this, null);
             }), null);
         }
 

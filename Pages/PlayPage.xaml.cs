@@ -68,30 +68,34 @@ namespace MultiGDLauncher
             }
         }
 
+        private GDInstanceItem? getSelectedInstanceItem()
+        {
+            GDInstanceItem? instanceItem = (GDInstanceItem)instancesCombo.SelectedItem;
+            return instanceItem;
+        }
+
         private void iconListItem_Click(object sender, EventArgs e)
         {
             IconListViewItem item = (IconListViewItem)sender;
             iconsList.Visibility = Visibility.Collapsed;
 
-            GDInstanceItem instanceItem = (GDInstanceItem)instancesCombo.SelectedItem;
-            int oldIndex = instancesCombo.SelectedIndex;
+            var instanceItem = getSelectedInstanceItem();
 
             if (instanceItem == null)
             {
                 return;
             }
 
+            int oldIndex = instancesCombo.SelectedIndex;
+
             var info = instanceItem.Info;
 
             info.LocalIconName = item.Filename;
 
-            Utils.SetInstanceInfo($"{LauncherSettingsState.StoragePath}\\{instanceItem.Info.Name}", info);
+            Utils.SetInstanceInfo(Utils.GetInstanceDirectory(instanceItem.Info.Name), info);
             initInstancesList();
 
             instancesCombo.SelectedIndex = oldIndex;
-
-            // currentIconImage.Source = item.IconSource;
-            // selectedIcon = item.Filename;
         }
 
         private void constructDefaultImagesList()
@@ -116,7 +120,10 @@ namespace MultiGDLauncher
                 Image image = new Image();
                 BitmapImage bi3 = new BitmapImage();
                 bi3.BeginInit();
-                bi3.StreamSource = Application.GetResourceStream(new Uri($"/Assets/ProfilesIcons/{i}.png", UriKind.Relative)).Stream;
+                bi3.StreamSource = Application.GetResourceStream(
+                    new Uri($"/Assets/ProfilesIcons/{i}.png", 
+                    UriKind.Relative)
+                ).Stream;
                 bi3.EndInit();
                 image.Source = bi3;
 
@@ -131,19 +138,18 @@ namespace MultiGDLauncher
 
         private void playButton_Click(object sender, RoutedEventArgs e)
         {
-            GDInstanceItem instanceItem = (GDInstanceItem)instancesCombo.SelectedItem;
-            
-            if ( instanceItem == null )
-            {
-                return;
-            }
+            var instanceItem = getSelectedInstanceItem();
 
             var startInfo = new ProcessStartInfo();
 
-            string gameExecutable = instanceItem.Info.GameExecutable != null ? instanceItem.Info.GameExecutable : "GeometryDash.exe";
+            string gameExecutable = (
+                instanceItem?.Info.GameExecutable != null 
+                ? instanceItem.Info.GameExecutable 
+                : "GeometryDash.exe"
+            );
 
-            startInfo.WorkingDirectory = $"{LauncherSettingsState.StoragePath}\\{instanceItem.Info.Name}";
-            startInfo.FileName = $"{LauncherSettingsState.StoragePath}\\{instanceItem.Info.Name}\\{gameExecutable}";
+            startInfo.WorkingDirectory = Utils.GetInstanceDirectory(instanceItem?.Info.Name ?? "");
+            startInfo.FileName = $"{Utils.GetInstanceDirectory(instanceItem?.Info.Name ?? "")}\\{gameExecutable}";
 
             Utils.SharedNotifier.ShowInformation($"Starting {gameExecutable}...");
 
@@ -159,16 +165,12 @@ namespace MultiGDLauncher
 
         private void openFolderButton_Click(object sender, RoutedEventArgs e)
         {
-            GDInstanceItem instanceItem = (GDInstanceItem)instancesCombo.SelectedItem;
+            var instanceItem = getSelectedInstanceItem();
 
-            if (instanceItem == null)
-            {
-                return;
-            }
 
             var startInfo = new ProcessStartInfo();
             startInfo.FileName = $"explorer";
-            startInfo.Arguments = $"{LauncherSettingsState.StoragePath}\\{instanceItem.Info.Name}";
+            startInfo.Arguments = Utils.GetInstanceDirectory(instanceItem?.Info.Name ?? "");
 
             try
             {
@@ -189,17 +191,12 @@ namespace MultiGDLauncher
 
         private void changeNameButton_Click(object sender, RoutedEventArgs e)
         {
-            GDInstanceItem instanceItem = (GDInstanceItem)instancesCombo.SelectedItem;
+            var instanceItem = getSelectedInstanceItem();
 
-            if (instanceItem == null)
-            {
-                return;
-            }
+            var info = instanceItem?.Info;
 
-            var info = instanceItem.Info;
-
-            string oldName = info.Name;
-            string newName = nameInput.Text.Trim();
+            var oldName = info?.Name;
+            var newName = nameInput.Text.Trim();
 
             if (newName.Length < 3)
             {
@@ -211,14 +208,14 @@ namespace MultiGDLauncher
 
             try
             {
-                Directory.Move($"{LauncherSettingsState.StoragePath}\\{oldName}", $"{LauncherSettingsState.StoragePath}\\{newName}");
+                Directory.Move(Utils.GetInstanceDirectory(oldName ?? ""), Utils.GetInstanceDirectory(newName));
             }
             catch (Exception ex)
             {
                 Utils.SharedNotifier.ShowError($"Unable to rename directory: {ex.Message}");
             }
 
-            Utils.SetInstanceInfo($"{LauncherSettingsState.StoragePath}\\{newName}", info);
+            Utils.SetInstanceInfo(Utils.GetInstanceDirectory(newName), info);
             initInstancesList();
 
             selectInstanceByName(newName);
@@ -248,7 +245,7 @@ namespace MultiGDLauncher
             }
 
             CreateInstancePage page = new CreateInstancePage(
-                $"{LauncherSettingsState.StoragePath}\\{instanceItem.Info.Name}",
+                Utils.GetInstanceDirectory(instanceItem.Info.Name),
                 $"{instanceItem.Info.Name} (Copy)",
                 instanceItem.Info.GameVersion,
                 instanceItem.Info.LocalIconName
@@ -278,7 +275,7 @@ namespace MultiGDLauncher
             {
                 Task.Run(() =>
                 {
-                    Directory.Delete($"{LauncherSettingsState.StoragePath}\\{instanceItem.Info.Name}", true);
+                    Directory.Delete(Utils.GetInstanceDirectory(instanceItem.Info.Name), true);
 
 
                     Dispatcher.Invoke(() =>

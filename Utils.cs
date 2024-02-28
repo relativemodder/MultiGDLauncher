@@ -58,6 +58,11 @@ namespace MultiGDLauncher
             return vers[unixedTimestamp];
         }
 
+        public static string GetInstanceDirectory(string instanceName)
+        {
+            return $"{LauncherSettingsState.StoragePath}\\{instanceName}";
+        }
+
         public static void OnPushClick(object sender, EventArgs e)
         {
             var window = System.Windows.Application.Current.MainWindow;
