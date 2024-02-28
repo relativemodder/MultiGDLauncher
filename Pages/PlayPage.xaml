@@ -1,0 +1,95 @@
+﻿<Page x:Class="MultiGDLauncher.PlayPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MultiGDLauncher"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PlayPage">
+
+    <ScrollViewer>
+        <Grid Margin="0,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*" MinHeight="50" MaxHeight="50"/>
+                <RowDefinition Height="43*" MinHeight="600"/>
+                <RowDefinition Height="43*" MinHeight="50"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35*"></ColumnDefinition>
+                    <ColumnDefinition Width="57*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Assets/UI/play_icon.png" HorizontalAlignment="Right" Margin="0,5,10,5" VerticalAlignment="Center" Width="30" Height="30" MaxWidth="35" MaxHeight="39" />
+                <TextBlock Foreground="White" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" FontFamily="Montserrat SemiBold">
+                    Select an instance
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65*" MaxHeight="80"/>
+                    <RowDefinition Height="322*"/>
+                </Grid.RowDefinitions>
+                <ComboBox x:Name="instancesCombo" MaxHeight="70" Cursor="Hand" SelectionChanged="instancesCombo_Selected"/>
+                <Grid x:Name="instanceSettings" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="55"></RowDefinition>
+                        <RowDefinition MaxHeight="55"></RowDefinition>
+                        <RowDefinition MaxHeight="55"></RowDefinition>
+                        <RowDefinition MaxHeight="55"></RowDefinition>
+                        <RowDefinition MaxHeight="55"></RowDefinition>
+                        <RowDefinition MaxHeight="55"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition MaxWidth="64"></ColumnDefinition>
+                            <ColumnDefinition MaxWidth="64"></ColumnDefinition>
+                            <ColumnDefinition MaxWidth="64"></ColumnDefinition>
+                            <ColumnDefinition MinWidth="280" MaxWidth="280"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <local:ButtonEx Grid.Column="0" x:Name="changeIconButton" HoverBackground="Gray" Click="changeIconButton_Click" MaxHeight="53">
+                            Change Icon
+                        </local:ButtonEx>
+                        <local:ButtonEx Grid.Column="1" x:Name="openFolderButton" HoverBackground="Gray" Click="openFolderButton_Click" MaxHeight="53">
+                            <Image Source="/Assets/UI/folder_icon.png" MaxHeight="35" />
+                        </local:ButtonEx>
+                        <local:ButtonEx Grid.Column="2" x:Name="duplicateButton" HoverBackground="Gray" Click="duplicateButton_Click" MaxHeight="50">
+                            <Image Source="/Assets/UI/copy_icon.png" MaxHeight="35" />
+                        </local:ButtonEx>
+                        <local:ButtonEx Grid.Column="3" x:Name="deleteButton" HoverBackground="Gray" Click="deleteButton_Click" MaxHeight="50">
+                            <Image Source="/Assets/UI/trash_icon.png" MaxHeight="35" />
+                        </local:ButtonEx>
+                        <local:ButtonEx Grid.Column="4" x:Name="playButton" HoverBackground="#FFCECECE" Click="playButton_Click" Background="#FF505050" MaxHeight="53">
+                            Play
+                        </local:ButtonEx>
+                    </Grid>
+                    <Grid x:Name="renameGrid" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition MinWidth="280" MaxWidth="280"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="nameInput"
+                             Background="#FF292929" Foreground="White" 
+                             FontFamily="Montserrat Medium" FontSize="16" SelectionBrush="#FF7FB6FF" 
+                             Margin="0,0,0,0" Grid.ColumnSpan="2" BorderBrush="{x:Null}" 
+                             VerticalContentAlignment="Center" Padding="10,0,10,0" MaxHeight="53" />
+                        <local:ButtonEx Grid.Column="2" x:Name="changeNameButton" HoverBackground="Gray" Click="changeNameButton_Click" MaxHeight="53">
+                            Change name
+                        </local:ButtonEx>
+                    </Grid>
+                    <Grid x:Name="iconSelectorGrid" Grid.Row="2">
+                        <ListView x:Name="iconsList" Background="#FF3C3C3C" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="0,0,20,0" BorderBrush="#00ABADB3" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel x:Name="iconsWrapPanel" IsItemsHost="True" HorizontalAlignment="Left" VerticalAlignment="Center" MaxWidth="800" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>

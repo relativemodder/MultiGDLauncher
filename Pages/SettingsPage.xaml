@@ -1,0 +1,87 @@
+﻿<Page x:Class="MultiGDLauncher.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MultiGDLauncher"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SettingsPage">
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*" MinHeight="50" MaxHeight="50"/>
+                <RowDefinition Height="43*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="43*"></ColumnDefinition>
+                    <ColumnDefinition Width="57*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Assets/UI/settings_icon.png" HorizontalAlignment="Right" Margin="0,5,10,5" VerticalAlignment="Center" Width="30" Height="30" />
+                <TextBlock Foreground="White" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" FontFamily="Montserrat SemiBold">Settings</TextBlock>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition MinHeight="100" MaxHeight="100" />
+                    <RowDefinition MinHeight="100" MaxHeight="100" />
+                    <RowDefinition MinHeight="100" MaxHeight="100" />
+                    <RowDefinition MinHeight="100" MaxHeight="100" />
+                    <RowDefinition MinHeight="100" MaxHeight="100" />
+                    <RowDefinition MinHeight="100" MaxHeight="100" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35*"/>
+                        <RowDefinition Height="62*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Foreground="White" FontFamily="Montserrat SemiBold" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0" Height="25" Width="339">Path to MultiGD Storage Directory:</TextBlock>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="151*"/>
+                            <ColumnDefinition Width="49*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="storageDirectoryInput"
+                         Background="#FF292929" Foreground="White" 
+                         FontFamily="Montserrat Medium" FontSize="16" SelectionBrush="#FF7FB6FF" 
+                         Margin="0,8,0,8" Grid.Column="0" BorderBrush="{x:Null}" 
+                         VerticalContentAlignment="Center" Padding="10,0,10,0" KeyDown="storageDirectoryInput_keyDown" MaxHeight="48" />
+                        <local:ButtonEx x:Name="storageDirectorySaveButton" 
+                                HoverBackground="Gray" 
+                                Grid.Column="1" Margin="10,8,10,8" Click="storageDirectorySaveButton_Click" MaxHeight="46">
+                            Save
+                        </local:ButtonEx>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35*"/>
+                        <RowDefinition Height="62*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Foreground="White" FontFamily="Montserrat SemiBold" FontSize="18" 
+                       HorizontalAlignment="Left" VerticalAlignment="Center" 
+                       Margin="25,0,0,0" Height="25" Width="339">
+                Path to Steam GD Directory:
+                    </TextBlock>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="151*"/>
+                            <ColumnDefinition Width="49*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="steamGDDirectoryInput"
+                         Background="#FF292929" Foreground="White" 
+                         FontFamily="Montserrat Medium" FontSize="16" SelectionBrush="#FF7FB6FF" 
+                         Margin="0,8,0,8" Grid.Column="0" BorderBrush="{x:Null}" 
+                         VerticalContentAlignment="Center" Padding="10,0,10,0" KeyDown="steamGDDirectoryInput_keyDown" MaxHeight="48" />
+                        <local:ButtonEx x:Name="steamGDDirectorySaveButton" 
+                                HoverBackground="Gray" 
+                                Grid.Column="1" Margin="10,8,10,8" Click="steamGDDirectorySaveButton_Click" MaxHeight="46">
+                            Save
+                        </local:ButtonEx>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>

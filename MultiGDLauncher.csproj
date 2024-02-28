@@ -1,0 +1,81 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>False</UseWindowsForms>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\icon.ico" />
+    <None Remove="Assets\icon.png" />
+    <None Remove="Assets\notification-icon.ico" />
+    <None Remove="Assets\ProfilesIcons\0.png" />
+    <None Remove="Assets\ProfilesIcons\1.png" />
+    <None Remove="Assets\ProfilesIcons\2.png" />
+    <None Remove="Assets\ProfilesIcons\3.png" />
+    <None Remove="Assets\ProfilesIcons\4.png" />
+    <None Remove="Assets\ProfilesIcons\5.png" />
+    <None Remove="Assets\ProfilesIcons\6.png" />
+    <None Remove="Assets\steam_appid.txt" />
+    <None Remove="Assets\UI\add_photo_icon.png" />
+    <None Remove="Assets\UI\copy_icon.png" />
+    <None Remove="Assets\UI\download_icon.png" />
+    <None Remove="Assets\UI\folder_icon.png" />
+    <None Remove="Assets\UI\play_icon.png" />
+    <None Remove="Assets\UI\settings_icon.png" />
+    <None Remove="Assets\UI\trash_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ToastNotifications" Version="2.5.1" />
+    <PackageReference Include="ToastNotifications.Messages" Version="2.5.1" />
+    <PackageReference Include="WindowsAPICodePack" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\icon.ico" />
+    <Resource Include="Assets\icon.png" />
+    <Resource Include="Assets\notification-icon.ico" />
+    <Resource Include="Assets\ProfilesIcons\0.png" />
+    <Resource Include="Assets\ProfilesIcons\1.png" />
+    <Resource Include="Assets\ProfilesIcons\2.png" />
+    <Resource Include="Assets\ProfilesIcons\3.png" />
+    <Resource Include="Assets\ProfilesIcons\4.png" />
+    <Resource Include="Assets\ProfilesIcons\5.png" />
+    <Resource Include="Assets\ProfilesIcons\6.png" />
+    <Resource Include="Assets\steam_appid.txt" />
+    <Resource Include="Assets\UI\add_photo_icon.png" />
+    <Resource Include="Assets\UI\copy_icon.png" />
+    <Resource Include="Assets\UI\download_icon.png" />
+    <Resource Include="Assets\UI\folder_icon.png" />
+    <Resource Include="Assets\UI\play_icon.png" />
+    <Resource Include="Assets\UI\settings_icon.png" />
+    <Resource Include="Assets\UI\trash_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
